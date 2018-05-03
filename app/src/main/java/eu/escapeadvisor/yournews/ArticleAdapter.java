@@ -66,9 +66,10 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 
     private String formatTime(String date) {
         String[] parts = date.split(TIME_SEPARATOR);
-        String zTime = parts[1];
-        String[] timeParts = zTime.split(Z_SEPARATOR);
-        onlyTime = timeParts[0];
+        onlyTime = parts[1];
+        if (onlyTime != null && onlyTime.length() > 0 && onlyTime.charAt(onlyTime.length() - 1) == 'Z') {
+            onlyTime = onlyTime.substring(0, onlyTime.length() - 1);
+        }
         return onlyTime;
     }
 }
