@@ -2,5 +2,6 @@
 <resources>
     <dimen name="listHeight">50dp</dimen>
     <dimen name="margin16">16dp</dimen>
+    <dimen name="margin8">8dp</dimen>
     <dimen name="roundSize">36dp</dimen>
 </resources>
