@@ -16,9 +16,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
     String date;
     private String onlyDate;
     private String onlyTime;
-    private String DATE_SEPARATOR = "-";
     private String TIME_SEPARATOR = "T";
-    private String Z_SEPARATOR = "Z ";
 
     public ArticleAdapter(Activity context, ArrayList<Article> articles) {
         super(context, 0, articles);
