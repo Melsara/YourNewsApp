@@ -1,6 +1,5 @@
 package eu.escapeadvisor.yournews;
 
-import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
