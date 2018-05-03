@@ -81,12 +81,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    public void onLoadFinished(Loader<List<Article>> loader, List<Article> earthquakes) {
+    public void onLoadFinished(Loader<List<Article>> loader, List<Article> articles) {
         Log.i("onLoadFinished()", "onLoadFinished() was called");
         progressBar.setVisibility(View.GONE);
         mAdapter.clear();
-        if (earthquakes != null && !earthquakes.isEmpty()) {
-            mAdapter.addAll(earthquakes);
+        if (articles != null && !articles.isEmpty()) {
+            mAdapter.addAll(articles);
         } else {
             emptyView.setText(R.string.empty_view);
         }
