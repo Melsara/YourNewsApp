@@ -39,7 +39,7 @@ public class QueryUtils {
             JSONObject response = data.getJSONObject("response");
             JSONArray results = response.getJSONArray("results");
 
-            for (int i=0; i< results.length(); i++) {
+            for (int i = 0; i < results.length(); i++) {
 
                 JSONObject currentArticle = results.getJSONObject(i);
                 String section = currentArticle.getString("sectionId").toString();
@@ -55,7 +55,7 @@ public class QueryUtils {
                     JSONObject authorInfo = tags.getJSONObject(0);
 
                     if (!authorInfo.isNull("webTitle"))
-                    author = authorInfo.getString("webTitle").toString();
+                        author = authorInfo.getString("webTitle").toString();
                 }
 
                 Article article = new Article(section, title, webUrl, author, date);
@@ -64,9 +64,6 @@ public class QueryUtils {
 
 
         } catch (JSONException e) {
-            // If an error is thrown when executing any of the above statements in the "try" block,
-            // catch the exception here, so the app doesn't crash. Print a log message
-            // with the message from the exception.
             Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
         }
 
@@ -100,7 +97,6 @@ public class QueryUtils {
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
-        // If the URL is null, then return early.
         if (url == null) {
             return jsonResponse;
         }
@@ -114,8 +110,6 @@ public class QueryUtils {
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-            // If the request was successful (response code 200),
-            // then read the input stream and parse the response.
             if (urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
