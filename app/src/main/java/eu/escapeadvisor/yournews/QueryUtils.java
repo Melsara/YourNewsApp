@@ -24,18 +24,15 @@ public class QueryUtils {
 
     private static List<Article> extractFeatureFromJson(String articleJSON) {
 
-        String author = "No author available";
+        String author = String.valueOf(R.string.no_author);
+        String date = String.valueOf(R.string.no_info);
 
         if (TextUtils.isEmpty(articleJSON)) {
             return null;
         }
 
-        // Create an empty ArrayList that we can start adding earthquakes to
         List<Article> articles = new ArrayList<>();
 
-        // Try to parse the SAMPLE_JSON_RESPONSE. If there's a problem with the way the JSON
-        // is formatted, a JSONException exception object will be thrown.
-        // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
             JSONObject data = new JSONObject(articleJSON);
 
@@ -48,12 +45,19 @@ public class QueryUtils {
                 String section = currentArticle.getString("sectionId").toString();
                 String title = currentArticle.getString("webTitle").toString();
                 String webUrl = currentArticle.getString("webUrl").toString();
-                String date = currentArticle.getString("webPublicationDate").toString();
+
+                if (!currentArticle.isNull("webPublicationDate")) {
+                    date = currentArticle.getString("webPublicationDate").toString();
+                }
+
                 JSONArray tags = currentArticle.getJSONArray("tags");
                 if (tags != null || !tags.isNull(1)) {
                     JSONObject authorInfo = tags.getJSONObject(0);
+
+                    if (!authorInfo.isNull("webTitle"))
                     author = authorInfo.getString("webTitle").toString();
                 }
+
                 Article article = new Article(section, title, webUrl, author, date);
                 articles.add(article);
             }
