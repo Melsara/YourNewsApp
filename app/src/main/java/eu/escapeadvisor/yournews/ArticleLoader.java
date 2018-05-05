@@ -29,7 +29,7 @@ public class ArticleLoader extends AsyncTaskLoader<List<Article>> {
             return null;
         }
 
-        final List<Article> articles = QueryUtils.fetchArticleData(mUrl);
+        final List<Article> articles = QueryUtils.fetchArticleData(mUrl, getContext());
         return articles;
     }
 }
