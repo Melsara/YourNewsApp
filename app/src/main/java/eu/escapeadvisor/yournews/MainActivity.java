@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     ProgressBar progressBar;
     TextView emptyView;
     static final String URL_KEY =
-            "https://content.guardianapis.com/search?order-by=newest&section=technology&page-size=20&api-key=68e50147-ab2a-43e8-83c8-2cbdb885c2ce&show-fields=thumbnail&show-tags=contributor";
+            "nonews-https://content.guardianapis.com/search?order-by=newest&section=technology&page-size=20&api-key=68e50147-ab2a-43e8-83c8-2cbdb885c2ce&show-fields=thumbnail&show-tags=contributor";
     private ArticleAdapter mAdapter;
     private static int ARTICLE_LOADER_ID = 1;
     public static final String LOG_TAG = MainActivity.class.getName();
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        emptyView = (TextView) findViewById(R.id.emptyView);
+        emptyView = (TextView) findViewById(R.id.emptyText);
         final ListView articleListView = (ListView) findViewById(R.id.list);
         articleListView.setEmptyView(emptyView);
 
