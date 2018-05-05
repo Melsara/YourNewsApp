@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Your News</string>
     <string name="no_internet">No internet connection.</string>
-    <string name="empty_view">No results to display.</string>
+    <string name="empty_view">No news to display.\nPlease come back later.</string>
     <string name="no_author">No author available</string>
     <string name="no_info">No info available</string>
 </resources>
