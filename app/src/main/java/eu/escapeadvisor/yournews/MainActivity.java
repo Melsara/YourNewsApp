@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     ProgressBar progressBar;
     TextView emptyView;
     static final String URL_KEY =
-            "nonews-https://content.guardianapis.com/search?order-by=newest&section=technology&page-size=20&api-key=test&show-fields=thumbnail&show-tags=contributor";
+            "https://content.guardianapis.com/search?order-by=newest&section=technology&page-size=20&api-key=test&show-fields=thumbnail&show-tags=contributor";
     private ArticleAdapter mAdapter;
     private static int ARTICLE_LOADER_ID = 1;
     public static final String LOG_TAG = MainActivity.class.getName();
