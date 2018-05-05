@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>>{
     ProgressBar progressBar;
     TextView emptyView;
+    ImageView emptyImage;
     static final String URL_KEY =
             "https://content.guardianapis.com/search?order-by=newest&section=technology&page-size=20&api-key=[API-KEY]&show-fields=thumbnail&show-tags=contributor";
     private ArticleAdapter mAdapter;
@@ -34,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        emptyView = (TextView) findViewById(R.id.emptyText);
+        emptyView = findViewById(R.id.emptyView);
+        emptyImage = findViewById(R.id.emptyImage);
         final ListView articleListView = (ListView) findViewById(R.id.list);
         articleListView.setEmptyView(emptyView);
 
@@ -88,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             mAdapter.addAll(articles);
         } else {
             emptyView.setText(R.string.empty_view);
+            emptyImage.setImageResource(R.drawable.newspaper);
         }
 
     }
