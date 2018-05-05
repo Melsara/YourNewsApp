@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             progressBar.setVisibility(View.GONE);
             emptyView.setText(R.string.no_internet);
-
+            emptyImage.setImageResource(R.drawable.sad);
         }
 
     }
