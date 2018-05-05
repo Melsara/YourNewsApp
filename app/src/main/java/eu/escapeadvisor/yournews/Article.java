@@ -36,6 +36,9 @@ public class Article {
         return mDate;
     }
 
+    public void setAuthor(String author) {
+        this.mAuthor = author;
+    }
 }
 
 

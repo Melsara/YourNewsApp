@@ -1,5 +1,6 @@
 package eu.escapeadvisor.yournews;
 
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -22,10 +23,14 @@ import static eu.escapeadvisor.yournews.MainActivity.LOG_TAG;
 
 public class QueryUtils {
 
-    private static List<Article> extractFeatureFromJson(String articleJSON) {
+    private QueryUtils() {
 
-        String author = String.valueOf(R.string.no_author);
-        String date = String.valueOf(R.string.no_info);
+    }
+
+    private static List<Article> extractFeatureFromJson(String articleJSON, Context context) {
+
+        context = context.getApplicationContext();
+        String date = context.getResources().getString(R.string.no_info);
 
         if (TextUtils.isEmpty(articleJSON)) {
             return null;
@@ -40,7 +45,7 @@ public class QueryUtils {
             JSONArray results = response.getJSONArray("results");
 
             for (int i = 0; i < results.length(); i++) {
-
+                String author = context.getResources().getString(R.string.no_author);
                 JSONObject currentArticle = results.getJSONObject(i);
                 String section = currentArticle.getString("sectionId").toString();
                 String title = currentArticle.getString("webTitle").toString();
@@ -51,11 +56,16 @@ public class QueryUtils {
                 }
 
                 JSONArray tags = currentArticle.getJSONArray("tags");
-                if (tags != null || !tags.isNull(1)) {
-                    JSONObject authorInfo = tags.getJSONObject(0);
+                int length = tags.length();
+                boolean tagsNull = tags.isNull(0);
+                if (tags != null) {
 
-                    if (!authorInfo.isNull("webTitle"))
-                        author = authorInfo.getString("webTitle").toString();
+                    if (!tagsNull && length > 0) {
+                        JSONObject authorInfo = tags.getJSONObject(0);
+
+                        if (!authorInfo.isNull("webTitle"))
+                            author = authorInfo.getString("webTitle").toString();
+                    }
                 }
 
                 Article article = new Article(section, title, webUrl, author, date);
@@ -129,7 +139,8 @@ public class QueryUtils {
         return jsonResponse;
     }
 
-    public static List<Article> fetchArticleData(String requestUrl) {
+    public static List<Article> fetchArticleData(String requestUrl, Context context) {
+        context = context.getApplicationContext();
         Log.i("fetchArticleData()", "fetchArticleData() was called");
         URL url = createUrl(requestUrl);
         String jsonResponse = null;
@@ -140,7 +151,7 @@ public class QueryUtils {
             e.printStackTrace();
         }
 
-        List<Article> articles = extractFeatureFromJson(jsonResponse);
+        List<Article> articles = extractFeatureFromJson(jsonResponse, context);
         return articles;
 
     }
