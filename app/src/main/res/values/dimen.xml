@@ -4,4 +4,6 @@
     <dimen name="margin16">16dp</dimen>
     <dimen name="margin8">8dp</dimen>
     <dimen name="roundSize">36dp</dimen>
+    <dimen name="textSize12">12sp</dimen>
+    <dimen name="textSize16">16sp</dimen>
 </resources>

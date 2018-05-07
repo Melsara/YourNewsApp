@@ -21,9 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Article>>{
-    ProgressBar progressBar;
-    TextView emptyView;
-    ImageView emptyImage;
+    private ProgressBar progressBar;
+    private TextView emptyView;
+    private ImageView emptyImage;
     static final String URL_KEY =
             "https://content.guardianapis.com/search?order-by=newest&section=technology&page-size=20&api-key=test&show-fields=thumbnail&show-tags=contributor";
     private ArticleAdapter mAdapter;
