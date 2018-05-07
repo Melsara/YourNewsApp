@@ -4,6 +4,8 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -51,7 +53,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 String url = currentArticle.getWebUrl();
                 Intent openArticle = new Intent(Intent.ACTION_VIEW);
                 openArticle.setData(Uri.parse(url));
-                startActivity(openArticle);
+                PackageManager pm = getPackageManager();
+                List<ResolveInfo> activities = pm.queryIntentActivities(openArticle, PackageManager.MATCH_ALL);
+                boolean launchIntent = activities.size() > 0;
+                if (launchIntent) {
+                    startActivity(openArticle);
+                }
             }
         });
 
