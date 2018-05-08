@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private TextView emptyView;
     private ImageView emptyImage;
     static final String URL_KEY =
-            "https://content.guardianapis.com/search?order-by=newest&section=technology&page-size=20&api-key=test&show-fields=thumbnail&show-tags=contributor";
+            "https://content.guardianapis.com/search?order-by=newest&section=technology&page-size=20&api-key=[API_KEY]&show-fields=thumbnail&show-tags=contributor";
     private ArticleAdapter mAdapter;
     private static int ARTICLE_LOADER_ID = 1;
     public static final String LOG_TAG = MainActivity.class.getName();
