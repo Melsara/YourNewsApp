@@ -31,6 +31,7 @@ public class QueryUtils {
 
         context = context.getApplicationContext();
         String date = context.getResources().getString(R.string.no_info);
+        String thumbnail = context.getResources().getString(R.string.no_info);
 
         if (TextUtils.isEmpty(articleJSON)) {
             return null;
@@ -55,6 +56,13 @@ public class QueryUtils {
                     date = currentArticle.getString("webPublicationDate").toString();
                 }
 
+
+                if (!currentArticle.isNull("fields")){
+                JSONObject fields = currentArticle.getJSONObject("fields");
+                thumbnail = fields.getString("thumbnail").toString();
+                }
+
+
                 JSONArray tags = currentArticle.getJSONArray("tags");
                 int length = tags.length();
                 boolean tagsNull = tags.isNull(0);
@@ -68,7 +76,7 @@ public class QueryUtils {
                     }
                 }
 
-                Article article = new Article(section, title, webUrl, author, date);
+                Article article = new Article(section, title, webUrl, author, date, thumbnail);
                 articles.add(article);
             }
 
