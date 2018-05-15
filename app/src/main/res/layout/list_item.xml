@@ -13,7 +13,7 @@
         android:layout_height="@dimen/roundSize"
         android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/margin16"
-        android:background="@color/colorPrimaryDark" />
+        android:background="@android:color/background_light" />
 
     <LinearLayout
         android:layout_width="0dp"
