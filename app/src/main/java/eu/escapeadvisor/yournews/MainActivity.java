@@ -4,11 +4,13 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private TextView emptyView;
     private ImageView emptyImage;
     static final String URL_KEY =
-            "https://content.guardianapis.com/search?order-by=newest&section=technology&page-size=20&api-key=[API-KEY]&show-fields=thumbnail&show-tags=contributor";
+            "https://content.guardianapis.com/search";
     private ArticleAdapter mAdapter;
     private static int ARTICLE_LOADER_ID = 1;
     public static final String LOG_TAG = MainActivity.class.getName();
@@ -103,8 +105,27 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<Article>> onCreateLoader(int i, Bundle bundle) {
-        Log.i("onCreateLoader()", "onCreateLoader() was called");
-        return new ArticleLoader(this, URL_KEY);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String orderBy = sharedPrefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default)
+        );
+
+        Uri baseUri = Uri.parse(URL_KEY);
+
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("api-key", "[API-KEY]");
+        uriBuilder.appendQueryParameter("section", "technology");
+        uriBuilder.appendQueryParameter("show-fields", "thumbnail");
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("orderby", orderBy);
+
+        Log.i("onCreateLoader()", "onCreateLoader() was called and this was the URL" + uriBuilder.toString());
+
+        return new ArticleLoader(this, uriBuilder.toString());
 
     }
 
