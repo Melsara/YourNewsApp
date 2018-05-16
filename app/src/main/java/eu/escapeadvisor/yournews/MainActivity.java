@@ -122,8 +122,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter("show-fields", "thumbnail");
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("order-by", orderBy);
+        uriBuilder.appendQueryParameter("q", "");
 
-        Log.i("onCreateLoader()", "onCreateLoader() was called and this was the URL" + uriBuilder.toString());
+        Log.i("onCreateLoader()", "onCreateLoader() was called and this was the URL " + uriBuilder.toString());
 
         return new ArticleLoader(this, uriBuilder.toString());
 
