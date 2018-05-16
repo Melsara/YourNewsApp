@@ -117,13 +117,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        uriBuilder.appendQueryParameter("api-key", "68e50147-ab2a-43e8-83c8-2cbdb885c2ce");
+        uriBuilder.appendQueryParameter("api-key", "[API-KEY]");
         uriBuilder.appendQueryParameter("section", "technology");
         uriBuilder.appendQueryParameter("show-fields", "thumbnail");
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("order-by", orderBy);
+        uriBuilder.appendQueryParameter("q", "");
 
-        Log.i("onCreateLoader()", "onCreateLoader() was called and this was the URL" + uriBuilder.toString());
+        Log.i("onCreateLoader()", "onCreateLoader() was called and this was the URL " + uriBuilder.toString());
 
         return new ArticleLoader(this, uriBuilder.toString());
 
