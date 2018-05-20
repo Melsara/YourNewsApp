@@ -11,7 +11,7 @@ import android.widget.FrameLayout;
 import android.widget.NumberPicker;
 
 /**
- * A {@link android.preference.Preference} that displays a number picker as a dialog.
+ * A {@link android.preference.Preference} that displays a number picker as a dialog. GitHub repo here: https://github.com/Alobar/AndroidPreferenceTest
  */
 public class NumberPickerPreference extends DialogPreference {
 
