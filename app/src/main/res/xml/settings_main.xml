@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:preference="http://schemas.android.com/apk/res-auto">
+
     <ListPreference
         android:defaultValue="@string/settings_order_by_default"
         android:entries="@array/settings_order_by_criteria_labels"
@@ -13,5 +15,13 @@
         android:key="@string/settings_query_by_key"
         android:selectAllOnFocus="true"
         android:title="@string/settings_query_by_label" />
+
+    <alobar.preference.NumberPickerPreference
+        android:defaultValue="@integer/number_default_value"
+        android:key="@string/settings_pageSize_key"
+        android:title="@string/settings_pageSize_label"
+        preference:maxValue="@integer/number_max_value"
+        preference:minValue="@integer/number_min_value"
+        preference:wrapSelectorWheel="false"/>
 
 </PreferenceScreen>
