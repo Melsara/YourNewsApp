@@ -118,6 +118,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                         getString(R.string.settings_query_by_default)
         ).toLowerCase();
 
+        int pageSize = sharedPrefs.getInt(
+                getString(R.string.settings_pageSize_key),
+                this.getResources().getInteger(R.integer.number_default_value)
+        );
+
         Uri baseUri = Uri.parse(URL_KEY);
 
         Uri.Builder uriBuilder = baseUri.buildUpon();
@@ -127,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("order-by", orderBy);
         uriBuilder.appendQueryParameter("q", queryBy);
+        uriBuilder.appendQueryParameter("page-size", String.valueOf(pageSize));
 
         Log.i("onCreateLoader()", "onCreateLoader() was called and this was the URL " + uriBuilder.toString());
 
