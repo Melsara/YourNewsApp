@@ -24,6 +24,8 @@ public class SettingsActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.settings_main);
             Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
             bindPreferenceSummaryToValue(orderBy);
+            Preference queryBy = findPreference(getString(R.string.settings_query_by_key));
+            bindPreferenceSummaryToValue(queryBy);
         }
 
         private void bindPreferenceSummaryToValue(Preference preference) {
