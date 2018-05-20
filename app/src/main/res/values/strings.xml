@@ -20,4 +20,8 @@
     <string name="settings_query_by_key" translatable="false">query_by</string>
     <string name="settings_query_by_default_key" translatable="false">@string/settings_query_by_default</string>
     <string name="settings_query_by_default">technology</string>
+    <string name="settings_pageSize_label">Number of articles</string>
+    <string name="settings_pageSize_key" translatable="false">page_size</string>
+    <string name="settings_pageSize_default_key" translatable="false">@string/settings_pageSize_default</string>
+    <string name="settings_pageSize_default">20</string>
 </resources>
