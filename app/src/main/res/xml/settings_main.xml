@@ -6,4 +6,12 @@
         android:entryValues="@array/settings_order_by_criteria_values"
         android:key="@string/settings_order_by_key"
         android:title="@string/settings_order_by_label" />
+
+    <EditTextPreference
+        android:defaultValue="@string/settings_query_by_default"
+        android:inputType="text"
+        android:key="@string/settings_query_by_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/settings_query_by_label" />
+
 </PreferenceScreen>

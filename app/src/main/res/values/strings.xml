@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Your News</string>
+    <string name="api_key">test</string>
     <string name="no_internet">No internet connection.</string>
     <string name="empty_view">No news to display.\nPlease come back later.</string>
     <string name="no_author">No author available</string>
@@ -15,4 +16,8 @@
     <string name="settings_order_by_oldest_value" translatable="false">oldest</string>
     <string name="settings_order_by_relevance_label">Relevance</string>
     <string name="settings_order_by_relevance_value" translatable="false">relevance</string>
+    <string name="settings_query_by_label">Search by keyword</string>
+    <string name="settings_query_by_key" translatable="false">query_by</string>
+    <string name="settings_query_by_default_key" translatable="false">@string/settings_query_by_default</string>
+    <string name="settings_query_by_default">technology</string>
 </resources>

@@ -113,16 +113,20 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getString(R.string.settings_order_by_default)
         );
 
+        String queryBy = sharedPrefs.getString(
+                getString(R.string.settings_query_by_key),
+                        getString(R.string.settings_query_by_default)
+        ).toLowerCase();
+
         Uri baseUri = Uri.parse(URL_KEY);
 
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        uriBuilder.appendQueryParameter("api-key", "[API-KEY]");
-        uriBuilder.appendQueryParameter("section", "technology");
+        uriBuilder.appendQueryParameter("api-key", getString(R.string.api_key));
         uriBuilder.appendQueryParameter("show-fields", "thumbnail");
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("order-by", orderBy);
-        uriBuilder.appendQueryParameter("q", "");
+        uriBuilder.appendQueryParameter("q", queryBy);
 
         Log.i("onCreateLoader()", "onCreateLoader() was called and this was the URL " + uriBuilder.toString());
 
