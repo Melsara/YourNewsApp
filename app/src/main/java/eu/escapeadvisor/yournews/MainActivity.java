@@ -4,14 +4,18 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -27,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private TextView emptyView;
     private ImageView emptyImage;
     static final String URL_KEY =
-            "https://content.guardianapis.com/search?order-by=newest&section=technology&page-size=20&api-key=[API_KEY]&show-fields=thumbnail&show-tags=contributor";
+            "https://content.guardianapis.com/search";
     private ArticleAdapter mAdapter;
     private static int ARTICLE_LOADER_ID = 1;
     public static final String LOG_TAG = MainActivity.class.getName();
@@ -83,9 +87,50 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public Loader<List<Article>> onCreateLoader(int i, Bundle bundle) {
-        Log.i("onCreateLoader()", "onCreateLoader() was called");
-        return new ArticleLoader(this, URL_KEY);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String orderBy = sharedPrefs.getString(
+                getString(R.string.settings_order_by_key),
+                getString(R.string.settings_order_by_default)
+        );
+
+        String queryBy = sharedPrefs.getString(
+                getString(R.string.settings_query_by_key),
+                        getString(R.string.settings_query_by_default)
+        ).toLowerCase();
+
+        Uri baseUri = Uri.parse(URL_KEY);
+
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("api-key", getString(R.string.api_key));
+        uriBuilder.appendQueryParameter("show-fields", "thumbnail");
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("order-by", orderBy);
+        uriBuilder.appendQueryParameter("q", queryBy);
+
+        Log.i("onCreateLoader()", "onCreateLoader() was called and this was the URL " + uriBuilder.toString());
+
+        return new ArticleLoader(this, uriBuilder.toString());
 
     }
 
