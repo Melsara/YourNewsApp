@@ -26,6 +26,8 @@ public class SettingsActivity extends AppCompatActivity {
             bindPreferenceSummaryToValue(orderBy);
             Preference queryBy = findPreference(getString(R.string.settings_query_by_key));
             bindPreferenceSummaryToValue(queryBy);
+            Preference pageSize = findPreference(getString(R.string.settings_pageSize_key));
+            bindPreferenceIntSummaryToValue(pageSize);
         }
 
         private void bindPreferenceSummaryToValue(Preference preference) {
@@ -34,6 +36,13 @@ public class SettingsActivity extends AppCompatActivity {
             String preferenceString = preferences.getString(preference.getKey(), "");
             onPreferenceChange(preference, preferenceString);
         }
+
+            private void bindPreferenceIntSummaryToValue(Preference preference) {
+                preference.setOnPreferenceChangeListener(this);
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
+                int preferenceInt = preferences.getInt(preference.getKey(), 20);
+                onPreferenceChange(preference, preferenceInt);
+            }
 
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
